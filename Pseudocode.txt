@@ -1,0 +1,253 @@
+"""
+Agent-Orchestrated Decision Support System
+for Logical Framework Development
+
+Pseudo / Sample Python Architecture
+Based on:
+"Scaffolding Program Design with Agent-Orchestrated Decision Support:
+A Design Science Approach to Logical Framework Development"
+"""
+
+# ---------------------------------------------------
+# Base Agent Class
+# ---------------------------------------------------
+
+class BaseAgent:
+    def process(self, input_data):
+        raise NotImplementedError
+
+
+# ---------------------------------------------------
+# Planner Agent
+# Responsible for sequencing workflow stages
+# ---------------------------------------------------
+
+class PlannerAgent(BaseAgent):
+
+    def process(self, program_context):
+
+        workflow_steps = [
+            "problem_framing",
+            "outcome_definition",
+            "intervention_logic",
+            "stakeholder_mapping",
+            "indicator_alignment",
+            "consistency_validation"
+        ]
+
+        return workflow_steps
+
+
+# ---------------------------------------------------
+# Context Agent
+# Maintains contextual information
+# ---------------------------------------------------
+
+class ContextAgent(BaseAgent):
+
+    def process(self, context):
+
+        structured_context = {
+            "target_population": context.get("target_population"),
+            "geographic_scope": context.get("geographic_scope"),
+            "system_constraints": context.get("constraints"),
+            "theme": context.get("theme")
+        }
+
+        return structured_context
+
+
+# ---------------------------------------------------
+# Guidance Agent
+# Provides prompts and structured guidance
+# ---------------------------------------------------
+
+class GuidanceAgent(BaseAgent):
+
+    def process(self, stage):
+
+        prompts = {
+
+            "problem_framing":
+                "Describe the core system-level problem.",
+
+            "outcome_definition":
+                "Define observable beneficiary-level outcomes.",
+
+            "intervention_logic":
+                "Map activities to outputs and outcomes.",
+
+            "stakeholder_mapping":
+                "Identify stakeholders and expected practice changes.",
+
+            "indicator_alignment":
+                "Define measurable indicators for outcomes.",
+
+            "consistency_validation":
+                "Review logical alignment and completeness."
+        }
+
+        return prompts.get(stage, "No guidance available")
+
+
+# ---------------------------------------------------
+# Memory Agent
+# Stores rationale and previous decisions
+# ---------------------------------------------------
+
+class MemoryAgent(BaseAgent):
+
+    def __init__(self):
+        self.memory_store = []
+
+    def process(self, decision):
+
+        self.memory_store.append(decision)
+
+    def retrieve_memory(self):
+
+        return self.memory_store
+
+
+# ---------------------------------------------------
+# Validation Agent
+# Checks consistency across framework
+# ---------------------------------------------------
+
+class ValidationAgent(BaseAgent):
+
+    def process(self, logical_framework):
+
+        validation_results = []
+
+        if not logical_framework.get("outcomes"):
+            validation_results.append("Missing outcomes")
+
+        if not logical_framework.get("indicators"):
+            validation_results.append("Indicators not defined")
+
+        if logical_framework.get("activities") and \
+           logical_framework.get("outcomes"):
+
+            validation_results.append(
+                "Activity-outcome alignment checked"
+            )
+
+        return validation_results
+
+
+# ---------------------------------------------------
+# Human-in-the-Loop Interface
+# User approval before progression
+# ---------------------------------------------------
+
+class HumanInterface:
+
+    def request_confirmation(self, stage_output):
+
+        print("\nUSER REVIEW REQUIRED")
+        print(stage_output)
+
+        # In real implementation:
+        # user_accept = UI input / dashboard approval
+
+        user_accept = True
+
+        return user_accept
+
+
+# ---------------------------------------------------
+# Orchestration Layer
+# Coordinates all agents
+# ---------------------------------------------------
+
+class OrchestrationLayer:
+
+    def __init__(self):
+
+        self.planner = PlannerAgent()
+        self.context_agent = ContextAgent()
+        self.guidance_agent = GuidanceAgent()
+        self.memory_agent = MemoryAgent()
+        self.validation_agent = ValidationAgent()
+        self.human_interface = HumanInterface()
+
+    def execute(self, context):
+
+        workflow = self.planner.process(context)
+
+        structured_context = self.context_agent.process(context)
+
+        logical_framework = {}
+
+        for stage in workflow:
+
+            print(f"\n--- Executing Stage: {stage} ---")
+
+            guidance = self.guidance_agent.process(stage)
+
+            print("Guidance:", guidance)
+
+            # Simulated user input
+            user_response = f"Sample response for {stage}"
+
+            logical_framework[stage] = user_response
+
+            self.memory_agent.process({
+                "stage": stage,
+                "response": user_response
+            })
+
+            approved = self.human_interface.request_confirmation(
+                logical_framework[stage]
+            )
+
+            if not approved:
+                print("User rejected output. Reworking...")
+                break
+
+        validation = self.validation_agent.process({
+            "activities":
+                logical_framework.get("intervention_logic"),
+
+            "outcomes":
+                logical_framework.get("outcome_definition"),
+
+            "indicators":
+                logical_framework.get("indicator_alignment")
+        })
+
+        print("\nValidation Results:")
+        for item in validation:
+            print("-", item)
+
+        return logical_framework
+
+
+# ---------------------------------------------------
+# Example Execution
+# ---------------------------------------------------
+
+if __name__ == "__main__":
+
+    sample_context = {
+
+        "target_population":
+            "Higher education students",
+
+        "geographic_scope":
+            "Bahrain",
+
+        "constraints":
+            "Limited digital literacy",
+
+        "theme":
+            "Educational intervention design"
+    }
+
+    orchestrator = OrchestrationLayer()
+
+    final_logical_framework = orchestrator.execute(sample_context)
+
+    print("\nFinal Review-Ready Logical Framework")
+    print(final_logical_framework)
