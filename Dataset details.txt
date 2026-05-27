@@ -1,0 +1,122 @@
+Dataset Description Document
+Agent-Orchestrated Decision Support for Logical Framework Development
+1. Dataset Overview
+
+This study does not utilise a conventional benchmark dataset such as UCI, Kaggle, Hugging Face, or publicly available machine learning repositories. Instead, the research relies on practitioner-generated artefacts and evaluation observations collected during the pilot implementation of the proposed agent-orchestrated decision-support framework for Logical Framework development.
+
+The dataset used in this research is therefore classified as a:
+
+Structured qualitative and semi-structured evaluation dataset
+Human-generated program design artefact collection
+Expert-reviewed Logical Framework evaluation dataset
+2. Nature of the Data
+
+The collected data consists of:
+
+Dataset Component	Description
+Program Design Inputs	Problem statements, intervention goals, stakeholder mappings, and contextual descriptions entered by participants
+Logical Framework Drafts	First-draft Logical Framework matrices generated manually and through the proposed system
+Evaluation Metrics	Structured assessment scores related to completeness, coherence, alignment, and clarity
+Practitioner Feedback	Qualitative observations and survey responses regarding usability and confidence
+Expert Review Assessments	Independent evaluation comments and rubric-based scoring provided by domain experts
+3. Data Collection Process
+
+The dataset was generated during the pilot evaluation phase of the proposed framework involving:
+
+18 program practitioners
+Education-focused non-governmental organisations
+Program managers and design practitioners
+Human-in-the-loop evaluation activities
+
+Participants were asked to:
+
+Develop Logical Frameworks manually using traditional template-based methods.
+Develop Logical Frameworks using the proposed agent-orchestrated decision-support framework.
+Provide feedback regarding usability, clarity, confidence, and perceived effectiveness.
+
+Independent expert reviewers subsequently assessed the generated artefacts using structured rubrics focused on:
+
+Logical coherence
+Completeness
+Stakeholder alignment
+Outcome-indicator consistency
+Evaluability
+4. Dataset Characteristics
+Characteristic	Description
+Data Type	Mixed qualitative and structured evaluation data
+Domain	Education and social-sector program design
+Data Format	Textual artefacts, structured forms, rubric scores
+Human Generated	Yes
+Annotated	Partially (through expert evaluation rubrics)
+Personally Identifiable Information	No
+Publicly Available	No
+Sensitive Data	No
+5. Sample Dataset Schema
+5.1 Program Design Input Schema
+{
+  "participant_id": "P01",
+  "target_population": "Higher education students",
+  "problem_statement": "Low employability skills",
+  "expected_outcomes": [
+    "Improved digital literacy",
+    "Improved employability"
+  ],
+  "stakeholders": [
+    "Faculty",
+    "Students",
+    "Industry mentors"
+  ]
+}
+5.2 Logical Framework Evaluation Schema
+{
+  "framework_id": "LF_001",
+  "coherence_score": 4.5,
+  "completeness_score": 4.2,
+  "indicator_alignment_score": 4.6,
+  "expert_comments": "Strong alignment between outcomes and indicators."
+}
+6. Evaluation Dimensions
+
+The dataset supports evaluation across the following dimensions:
+
+Dimension	Description
+Efficiency	Time to first coherent Logical Framework draft
+Completeness	Coverage of required LFA components
+Coherence	Internal consistency across outputs, outcomes, and indicators
+Stakeholder Alignment	Mapping between stakeholders and practice changes
+User Confidence	Practitioner perception and usability
+7. Ethical and Privacy Considerations
+
+The dataset does not contain:
+
+Patient information
+Clinical data
+Financial records
+Sensitive personal identifiers
+
+All practitioner participation was voluntary, and collected responses were anonymised before analysis. The dataset was used strictly for academic and research evaluation purposes.
+
+8. Data Availability Statement
+
+No publicly available benchmark dataset was used in this study. The dataset generated during the evaluation phase consists primarily of practitioner-generated Logical Framework artefacts and expert assessment observations developed specifically for this research.
+
+Supporting materials and sample artefacts may be made available by the corresponding author upon reasonable academic request.
+
+9. Potential Future Extensions
+
+Future versions of the dataset may include:
+
+Multi-domain program design cases
+Longitudinal program evaluation data
+Multi-country intervention design scenarios
+Expanded stakeholder ontology mappings
+Synthetic benchmark Logical Framework repositories
+10. Suggested Repository Structure (Future)
+dataset/
+│
+├── participant_inputs/
+├── logical_framework_drafts/
+├── evaluation_rubrics/
+├── expert_reviews/
+├── validation_logs/
+└── README.md
